@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-##  I’m currently working on ...
+##  I’m currently working on future projects ...
 
 // To access private Repo create full request me. 
 
