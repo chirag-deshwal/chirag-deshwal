@@ -1,6 +1,10 @@
 ### Hi there 👋
 
 ##  I’m currently working on ...
+
+## To access private Repo create full request in main. 
+
+
 <!--
 **rahuldeshwal21/rahuldeshwal21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
