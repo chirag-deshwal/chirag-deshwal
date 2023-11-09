@@ -1,8 +1,7 @@
 ### Hi there 👋
 
-##  I’m currently working on future projects ...
+##  I'm Rahul. how are you. 
 
-// To access private Repo create full request me. 
 
 ![App Screenshot](https://raw.githubusercontent.com/rahuldeshwal21/rahuldeshwal21/main/github-contribution-grid-snake.gif)
 
