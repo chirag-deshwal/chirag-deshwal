@@ -2,7 +2,7 @@
 
 **Android Developer** · **Team Lead** · **Full-Stack Developer**
 
-Building production Level Apps for Andorid. Also using AI for Code like, Github Copilot, AntiGravity, Manus. 
+Building production Level Apps for Android. Also using AI for Code like, GitHub Copilot, Antigravity, Manus.
 
 ---
 
