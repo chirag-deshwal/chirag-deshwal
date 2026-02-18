@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rahul Deshwal - Android & Flutter Developer Portfolio CD.OS">
+    <title>CD.OS | Rahul Deshwal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Sacramento&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Boot Sequence Overlay -->
+    <div id="boot-sequence">
+        <div class="boot-text">
+            <span>> INITIALIZING CD.OS KERNEL...</span>
+            <span>> LOADING ASSETS...</span>
+            <span>> ESTABLISHING SECURE CONNECTION...</span>
+            <span>> ACCESS GRANTED.</span>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fas fa-terminal"></i>
+                <span class="brand-text">CD.OS</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#hub" class="nav-item active" data-tab="hub">
+                    <i class="fas fa-th-large"></i>
+                    <span>Central Hub</span>
+                </a>
+                <a href="#achievements" class="nav-item" data-tab="achievements">
+                    <i class="fas fa-trophy"></i>
+                    <span>Achievements</span>
+                </a>
+                <a href="#deployments" class="nav-item" data-tab="deployments">
+                    <i class="fas fa-code-branch"></i>
+                    <span>Deployments</span>
+                </a>
+                <a href="#skills" class="nav-item" data-tab="skills">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Core Skills</span>
+                </a>
+                <a href="#comms" class="nav-item" data-tab="comms">
+                    <i class="fas fa-at"></i>
+                    <span>Communication</span>
+                </a>
+            </nav>
+
+            <div class="user-mini-profile">
+                <div class="avatar-mini">
+                    <img src="https://github.com/chirag-deshwal.png" alt="Profile">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Rahul Deshwal</span>
+                    <span class="user-level">LEVEL 25 DEV</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- Dashboard Grid (Central Hub) -->
+            <div id="hub-view" class="view-section active">
+
+                <!-- Hero Card -->
+                <div class="card hero-card">
+                    <div class="card-header">
+                        <span class="status-badge success">KERNEL ACCESS GRANTED</span>
+                        <div class="line-spacer"></div>
+                    </div>
+                    <div class="hero-body">
+                        <h1 class="signature-name">Rahul Deshwal</h1>
+                        <h2 class="role-title">Android Developer <span class="blink">_</span></h2>
+                        <p class="bio-text">
+                            Experienced app developer skilled in <strong>Kotlin</strong>, <strong>Java</strong>, and
+                            <strong>Flutter</strong> with a strong background in app creation and enhancement.
+                            Proficient in Firebase and AI integration for high-performance mobile experiences.
+                        </p>
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="window.location.href='#deployments'">
+                                <i class="fas fa-rocket"></i> View Projects
+                            </button>
+                            <button class="btn-secondary">
+                                <i class="fas fa-download"></i> Download CV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-character">
+                        <img src="https://cd-os-assets.s3.amazonaws.com/rahul_character_placeholder.png"
+                            onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'; this.style.filter='grayscale(100%) brightness(0.5)';"
+                            alt="Rahul Character">
+                    </div>
+                </div>
+
+                <!-- Lower Grid -->
+                <div class="dashboard-grid">
+
+                    <!-- System Achievements -->
+                    <div class="card achievements-card">
+                        <div class="card-top-bar">
+                            <h3><i class="fas fa-medal"></i> System Achievements</h3>
+                            <span class="status-text">STATUS: OPTIMIZED</span>
+                        </div>
+                        <div class="achievements-list">
+                            <div class="achievement-item">
+                                <div class="icon-box red"><i class="fas fa-trophy"></i></div>
+                                <div class="ach-details">
+                                    <h4>Founder of Dtrend</h4>
+                                    <p>Solo Developer Firm establishing secure digital solutions.</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="icon-box red"><i class="fas fa-folder-open"></i></div>
+                                <div class="ach-details">
+                                    <h4>Open Source</h4>
+                                    <p>Creator of FocusLab & active contributor to community.</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="icon-box red"><i class="fas fa-project-diagram"></i></div>
+                                <div class="ach-details">
+                                    <h4>10+ Projects</h4>
+                                    <p>Developed and deployed feature-rich applications.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dev Analytics -->
+                    <div class="card analytics-card">
+                        <div class="card-top-bar">
+                            <h3><i class="fas fa-chart-bar"></i> Dev Analytics</h3>
+                        </div>
+                        <div class="analytics-body">
+                            <div class="stat-row">
+                                <span>Total Deployments</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>System Uptime</span>
+                                <span class="stat-value red-text">7,000h+</span>
+                            </div>
+
+                            <div class="skill-bar-container">
+                                <div class="skill-info">
+                                    <span>ANDROID DOMINANCE</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: 95%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-bar-container">
+                                <div class="skill-info">
+                                    <span>FLUTTER SYNC</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: 88%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="skill-bar-container">
+                                <div class="skill-info">
+                                    <span>AI INTEGRATION</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Core Skills Ticker -->
+                <div class="card skills-ticker-card">
+                    <div class="card-top-bar">
+                        <h3><i class="fas fa-microchip"></i> Core Processing Skills</h3>
+                        <div class="tags">
+                            <span class="tag">MVVM</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">FIREBASE</span>
+                            <span class="tag">GIT</span>
+                            <span class="tag">JETPACK COMPOSE</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Placeholder for other tabs (hidden by default) -->
+            <div id="deployments-view" class="view-section" style="display:none;">
+                <div class="card full-height">
+                    <h2>Deployments Log</h2>
+                    <!-- Project grid would go here -->
+                    <div class="projects-grid-view">
+                        <div class="project-item card">
+                            <h3>FocusLab</h3>
+                            <p>Productivity application built with Flutter.</p>
+                            <a href="https://github.com/chirag-deshwal/focus_lab_flutter" class="btn-sm">Git Access</a>
+                        </div>
+                        <!-- Add more project cards -->
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
