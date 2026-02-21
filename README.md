@@ -4,7 +4,7 @@
 
 Building production Level Apps for Android. Also using AI for Code like, GitHub Copilot, Antigravity, Manus.
 
--
+---
 
 ### Now
 
