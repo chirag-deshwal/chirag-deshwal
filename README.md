@@ -1,6 +1,6 @@
 # Rahul Deshwal
 
-**Android Developer** · **Team Lead** · **Flutter Developer** · **AI Explorer*
+**Android Developer** · **Team Lead** · **Flutter Developer** · **AI Explorer**
 
 Building production Level Apps for Android. Also using AI for Code like, GitHub Copilot, Antigravity, Manus.
 
