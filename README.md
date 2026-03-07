@@ -1,4 +1,4 @@
-# Chirag Deshwal
+# Rahul Deshwal
 
 **Android Developer** · **Team Lead** · **Flutter Developer** · **AI Explorer**
 
@@ -8,7 +8,7 @@ Building production Level Apps for Android. Also using AI for Code like, GitHub 
 
 ### Now
 
-- **Inspiration** at [GDG Dev's](https://gdg.community.dev) — Finding any company to run commend git merge --developersgroup 
+- **Inspiration** at [GDG Dev's Community](https://gdg.community.dev) — Finding any company to run commend git merge --developersgroup 
 - **Creator** of [FocusLab](https://github.com/chirag-deshwal/focus_lab_flutter) — Made by Love with Flutter, Using the AntiGravity
 
 ---
