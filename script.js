@@ -66,7 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         try {
                             const canvas = document.getElementById('skills-canvas');
                             if (canvas) {
-                                initializeSkillsConstellation();
+                                // Ensure canvas is visible and has proper dimensions
+                                const container = canvas.parentElement;
+                                if (container && container.offsetWidth > 0) {
+                                    initializeSkillsConstellation();
+                                } else {
+                                    // Wait a bit more for the layout to settle
+                                    setTimeout(() => {
+                                        initializeSkillsConstellation();
+                                    }, 100);
+                                }
                             } else {
                                 console.warn('Skills canvas not found');
                             }
@@ -150,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Constellation data - positions will be scaled to canvas size
     const constellations = {
         mobile: {
-            name: 'Mobile Galaxy',
+            name: 'Android Developer Journey',
             description: 'Core Android ecosystem with modern frameworks and cross-platform capabilities',
             color: '#00D4FF',
             stars: [
@@ -175,9 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Database technologies and data persistence solutions',
             color: '#FF6B6B',
             stars: [
-                { name: 'SQLite', x: 0.75, y: 0.3, size: 6, connections: ['Room DB', 'Flutter'] },
-                { name: 'Firebase', x: 0.85, y: 0.4, size: 6, connections: ['Flutter', 'Android SDK'] },
-                { name: 'Room DB', x: 0.7, y: 0.35, size: 5, connections: ['SQLite', 'Android SDK'] }
+                { name: 'SQLite', x: 0.55, y: 0.25, size: 6, connections: ['Room DB', 'Flutter'] },
+                { name: 'Firebase', x: 0.65, y: 0.35, size: 6, connections: ['Flutter', 'Android SDK'] },
+                { name: 'Room DB', x: 0.5, y: 0.3, size: 5, connections: ['SQLite', 'Android SDK'] }
             ]
         },
         backend: {
@@ -185,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Server-side technologies and API integrations',
             color: '#FFA500',
             stars: [
-                { name: 'REST API', x: 0.55, y: 0.7, size: 5, connections: ['Java', 'AI Integration'] },
-                { name: 'AI Integration', x: 0.65, y: 0.65, size: 4, connections: ['REST API', 'Android SDK'] }
+                { name: 'REST API', x: 0.45, y: 0.7, size: 5, connections: ['Java', 'AI Integration'] },
+                { name: 'AI Integration', x: 0.55, y: 0.65, size: 4, connections: ['REST API', 'Android SDK'] }
             ]
         },
         tools: {
@@ -307,6 +316,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Window resize handler
         window.addEventListener('resize', resizeCanvas);
+
+        // Start animation
+        animate();
     }
 
     function resizeCanvas() {
@@ -380,9 +392,23 @@ document.addEventListener('DOMContentLoaded', () => {
         star.x += star.vx;
         star.y += star.vy;
 
-        // Boundary checks
-        if (star.x < 0 || star.x > constellationCanvas.width) star.vx *= -1;
-        if (star.y < 0 || star.y > constellationCanvas.height) star.vy *= -1;
+        // Boundary checks - keep them close to their original positions so they don't wander heavily
+        const maxDrift = 40;
+        if (star.x < star.originalX - maxDrift || star.x > star.originalX + maxDrift) {
+            star.vx *= -1;
+            star.x = Math.max(star.originalX - maxDrift, Math.min(star.originalX + maxDrift, star.x));
+        }
+        if (star.y < star.originalY - maxDrift || star.y > star.originalY + maxDrift) {
+            star.vy *= -1;
+            star.y = Math.max(star.originalY - maxDrift, Math.min(star.originalY + maxDrift, star.y));
+        }
+
+        // Avoid hiding behind the UI panel on the right (approx 320px wide)
+        const maxRight = Math.max(10, constellationCanvas.width - 320);
+        if (star.x > maxRight) {
+            star.x -= 2;
+            if (star.vx > 0) star.vx *= -1;
+        }
 
         // Twinkle effect
         star.twinkle += star.twinkleSpeed;
@@ -399,15 +425,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawStar(star) {
         const twinkleOpacity = 0.7 + Math.sin(star.twinkle) * 0.3;
         const isHovered = hoveredStar === star;
+        const displaySize = isHovered ? star.size * 1.5 : star.size; // Grow slightly on hover
 
         // Outer glow
         if (isHovered) {
-            const gradient = constellationCtx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 3);
-            gradient.addColorStop(0, star.constellation.color + '40');
+            // Animated, pulsating larger glow
+            const glowSize = displaySize * (3 + Math.sin(Date.now() / 150) * 0.5);
+            const gradient = constellationCtx.createRadialGradient(star.x, star.y, 0, star.x, star.y, glowSize);
+            gradient.addColorStop(0, star.constellation.color + '60');
             gradient.addColorStop(1, star.constellation.color + '00');
             constellationCtx.fillStyle = gradient;
             constellationCtx.beginPath();
-            constellationCtx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+            constellationCtx.arc(star.x, star.y, glowSize, 0, Math.PI * 2);
             constellationCtx.fill();
         }
 
@@ -415,24 +444,30 @@ document.addEventListener('DOMContentLoaded', () => {
         constellationCtx.fillStyle = star.constellation.color;
         constellationCtx.globalAlpha = twinkleOpacity;
         constellationCtx.beginPath();
-        constellationCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        constellationCtx.arc(star.x, star.y, displaySize, 0, Math.PI * 2);
         constellationCtx.fill();
 
         // Inner bright core
         constellationCtx.fillStyle = '#FFFFFF';
         constellationCtx.globalAlpha = twinkleOpacity * 0.8;
         constellationCtx.beginPath();
-        constellationCtx.arc(star.x, star.y, star.size * 0.4, 0, Math.PI * 2);
+        constellationCtx.arc(star.x, star.y, displaySize * 0.4, 0, Math.PI * 2);
         constellationCtx.fill();
 
         constellationCtx.globalAlpha = 1;
 
-        // Star name (when hovered)
+        // Star name and connections (when hovered)
         if (isHovered) {
             constellationCtx.fillStyle = '#FFFFFF';
-            constellationCtx.font = '12px Outfit';
+            constellationCtx.font = 'bold 14px Outfit';
             constellationCtx.textAlign = 'center';
-            constellationCtx.fillText(star.name, star.x, star.y - star.size - 15);
+            constellationCtx.fillText(star.name, star.x, star.y - star.size - 25);
+            
+            if (star.connections && star.connections.length > 0) {
+                constellationCtx.fillStyle = '#AAAAAA';
+                constellationCtx.font = '11px Outfit';
+                constellationCtx.fillText('Connected to: ' + star.connections.join(', '), star.x, star.y - star.size - 10);
+            }
         }
     }
 
@@ -445,32 +480,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dy = connectedStar.y - star.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    // Only draw connection if stars are reasonably close (relative to canvas size)
-                    const maxDistance = Math.min(constellationCanvas.width, constellationCanvas.height) * 0.3;
-                    if (distance < maxDistance) {
-                        const opacity = Math.max(0.1, 1 - distance / maxDistance);
-                        const isHighlighted = (hoveredStar === star || hoveredStar === connectedStar);
+                    // Always draw specified connections, remove max distance limit
+                    const isHighlighted = (hoveredStar === star || hoveredStar === connectedStar);
 
-                        constellationCtx.strokeStyle = star.constellation.color;
-                        constellationCtx.globalAlpha = isHighlighted ? opacity * 0.8 : opacity * 0.3;
-                        constellationCtx.lineWidth = isHighlighted ? 2 : 1;
+                    constellationCtx.strokeStyle = star.constellation.color;
+                    constellationCtx.globalAlpha = isHighlighted ? 0.9 : 0.3;
+                    constellationCtx.lineWidth = isHighlighted ? 3 : 1; // Thicker lines for hovered
 
+                    if (isHighlighted) {
+                        // Animated dashed lines for connections
+                        constellationCtx.setLineDash([8, 6]);
+                        constellationCtx.lineDashOffset = -Date.now() / 40;
+                    } else {
+                        constellationCtx.setLineDash([]);
+                    }
+
+                    constellationCtx.beginPath();
+                    constellationCtx.moveTo(star.x, star.y);
+                    constellationCtx.lineTo(connectedStar.x, connectedStar.y);
+                    constellationCtx.stroke();
+
+                    constellationCtx.setLineDash([]); // Reset immediately after stroke
+
+                    // Animated energy particles along connection
+                    if (isHighlighted && Math.random() < 0.2) { // Increased particle spawn rate
+                        const particleX = star.x + dx * Math.random();
+                        const particleY = star.y + dy * Math.random();
+
+                        constellationCtx.fillStyle = '#FFFFFF'; // Bright white particles
+                        constellationCtx.globalAlpha = 1.0;
                         constellationCtx.beginPath();
-                        constellationCtx.moveTo(star.x, star.y);
-                        constellationCtx.lineTo(connectedStar.x, connectedStar.y);
-                        constellationCtx.stroke();
-
-                        // Animated energy particles along connection
-                        if (isHighlighted && Math.random() < 0.1) {
-                            const particleX = star.x + dx * Math.random();
-                            const particleY = star.y + dy * Math.random();
-
-                            constellationCtx.fillStyle = star.constellation.color;
-                            constellationCtx.globalAlpha = 0.8;
-                            constellationCtx.beginPath();
-                            constellationCtx.arc(particleX, particleY, 2, 0, Math.PI * 2);
-                            constellationCtx.fill();
-                        }
+                        constellationCtx.arc(particleX, particleY, 2.5, 0, Math.PI * 2);
+                        constellationCtx.fill();
                     }
                 }
             });
