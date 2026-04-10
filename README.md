@@ -46,7 +46,7 @@ Building production Level Apps for Android. Also using AI for Code like, GitHub 
 
 ### Background
 
-- 7,000+ hours in App Developer
+- 7,200+ hours in App Developer
 - Founded Dtrend — Solo Devloper Firm
 - Delhi NCR, India
 
@@ -55,5 +55,5 @@ Building production Level Apps for Android. Also using AI for Code like, GitHub 
 <p align="center">
   <a href="https://www.instagram.com/iamrahuldeshwal">Instagram</a> ·
   <a href="mailto:care.deshwal@gmail.com">Email</a> ·
-  <a href="https://chirag-deshwal.github.io">Website</a> 
+  <a href="https://chirag-deshwal.github.io">Website </a> 
 </p>
